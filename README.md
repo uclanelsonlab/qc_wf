@@ -1,7 +1,7 @@
-# wgs_qc_wf
-WDL workflow used to check QC for WGS data
+# QC Workflow
+- `wgs_qc_wf.wdl`: WDL QC workflow for WGS data
 
-- [DONE] test fastp
+> [DONE] test fastp
 ```bash
 dx run /apps/wdl_wf/qc_wf/fastp_wf \
     -istage-common.fastq_r1=file-GX0Gv3002k8vFY5xGb9469xj \
@@ -11,8 +11,7 @@ dx run /apps/wdl_wf/qc_wf/fastp_wf \
     --name UDN921066-P_fastp
 ```
 
-- [DONE] test picard
-workflow-GX0fKg002k8bBJb7YzfqbpZ2
+> [DONE] test picard
 ```bash
 dx run /apps/wdl_wf/qc_wf/picard_qc \
     -istage-common.bam_file=file-GX0QyVj02k8z7zbJJKkpqk63 \
@@ -25,7 +24,7 @@ dx run /apps/wdl_wf/qc_wf/picard_qc \
     --name UDN921066-P_chr1_picard_qc
 ```
 
-- [TODO] test qualimap
+> [TODO] test qualimap
 ```bash
 dx run /apps/wdl_wf/qc_wf/qualimap_bamqc_wf \
     -istage-common.bam_file=file-GX0QyVj02k8z7zbJJKkpqk63 \
@@ -35,7 +34,7 @@ dx run /apps/wdl_wf/qc_wf/qualimap_bamqc_wf \
     --name UDN921066-P_qualimap
 ```
 
-- [DONE] test multiqc
+> [DONE] test multiqc
 ```bash
 dx run /apps/wdl_wf/qc_wf/multiqc_wf \
     -istats_files=file-GX17xj80jgJvZxJzxJF71QzY \
@@ -56,7 +55,7 @@ dx run /apps/wdl_wf/qc_wf/multiqc_wf \
     --name UDN921066-P_filtered_multiqc
 ```
 
-- test everything
+> test everything
 ```bash
 dx run /apps/wdl_wf/qc_wf/qc_wf \
     -istage-common.bam_file=file-GX0QyVj02k8z7zbJJKkpqk63 \
@@ -70,3 +69,4 @@ dx run /apps/wdl_wf/qc_wf/qc_wf \
     -y --brief --folder /gcarvalho_test/qc_wf/test_qc \
     --name UDN921066-P_filtered_qc
 ```
+---
