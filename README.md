@@ -23,6 +23,7 @@ dx run /apps/wdl_wf/qc_wf/picard_qc \
     -istage-common.prefix="UDN921066-P_chr1" \
     -y --brief --folder /gcarvalho_test/qc_wf/test_picard \
     --name UDN921066-P_chr1_picard_qc
+```
 
 - [TODO] test qualimap
 ```bash
