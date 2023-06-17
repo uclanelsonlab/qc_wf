@@ -1,6 +1,6 @@
 version 1.0
 
-task multiqc {
+task multiqc_array {
     meta {
         author: "George Carvalho"
         email: "gcarvalhoneto@mednet.ucla.edu"
@@ -16,6 +16,49 @@ task multiqc {
         set -uexo pipefail
         multiqc \
             --file-list ${write_lines(stats_files)} \
+            --filename ~{prefix}_multiqc \
+            --title ~{prefix} -z
+    }
+    runtime {
+        docker: actual_multiqc_image
+        dx_instance_type: "mem1_ssd1_v2_x16"
+        dx_ignore_reuse: true
+        dx_restart: object {
+            default: 1,
+            max: 1,
+            errors: object {
+                UnresponsiveWorker: 2,
+                ExecutionError: 2,
+            }
+        }
+        dx_timeout: "5H30M"
+        dx_access: object {
+            network: ["*"],
+            developer: true
+        }
+    }
+    output {
+        File multiqc_html = "~{prefix}_multiqc.html"
+        File multiqc_data = "~{prefix}_multiqc_data.zip"
+    }
+}
+
+task multiqc_file {
+    meta {
+        author: "George Carvalho"
+        email: "gcarvalhoneto@mednet.ucla.edu"
+        description: "## Aggregate results from bioinformatics analyses across many samples into a single report. https://multiqc.info/"
+    }
+    input {
+        File files_list
+        String prefix
+        String? multiqc_image
+    }
+    String actual_multiqc_image=select_first([multiqc_image, "quay.io/biocontainers/multiqc:1.14--pyhdfd78af_0"])
+    command {
+        set -uexo pipefail
+        multiqc \
+            --file-list ~{files_list} \
             --filename ~{prefix}_multiqc \
             --title ~{prefix} -z
     }
@@ -60,14 +103,14 @@ workflow multiqc_wf {
         String prefix
         String? multiqc_image
     }
-    call multiqc {
+    call multiqc_array {
         input:
             stats_files=stats_files,
             prefix=prefix,
             multiqc_image=multiqc_image
     }
     output {
-        File multiqc_html = multiqc.multiqc_html
-        File multiqc_data = multiqc.multiqc_data
+        File multiqc_html = multiqc_array.multiqc_html
+        File multiqc_data = multiqc_array.multiqc_data
     }
 }

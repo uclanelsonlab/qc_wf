@@ -102,7 +102,7 @@ workflow wgs_qc_wf {
             java_mem = java_mem,
             picard_docker = picard_docker
     }
-    call multiqc_task.multiqc as multiqc {
+    call multiqc_task.multiqc_array as multiqc {
         input:
             stats_files = [
                 fastp_stats.fastp_html, 

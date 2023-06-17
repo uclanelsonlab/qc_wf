@@ -69,4 +69,13 @@ dx run /apps/wdl_wf/wgs_qc_wf/qc_wf \
     -y --brief --folder /gcarvalho_test/qc_wf/test_qc \
     --name UDN921066-P_filtered_qc
 ```
+
+> test multi sample for multiqc
+```shell
+dx run /apps/wdl_wf/wgs_qc_wf/find_data_multiqc_wf \
+    -istage-common.dir_path=/Analysis/hg38_udn/UDN921066/filtered_bam/ \
+    -istage-common.prefix="UDN921066-P_UDN085245-F_UDN501807-M" \
+    -y --brief --folder /Analysis/hg38_udn/UDN921066/filtered_bam/ \
+    --name UDN921066-P_UDN085245-F_UDN501807-M_multiqc
+```
 ---
