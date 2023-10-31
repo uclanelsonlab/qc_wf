@@ -96,7 +96,7 @@ task picard_CollectWgsMetrics {
                 ExecutionError: 2,
             }
         }
-        dx_timeout: "4H30M"
+        dx_timeout: "6H30M"
         dx_access: object {
             network: ["*"],
             developer: true
