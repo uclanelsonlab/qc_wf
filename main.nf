@@ -10,12 +10,11 @@
 // Enable DSL 2 syntax
 nextflow.enable.dsl = 2
 
-include {
-    FASTP from './modules/fastp.nf'
-    CHECK_AND_PROCESS_ALIGNMENT from './modules/samtools.nf'
-    PICARD_COLLECT_MULTIPLE_METRICS; PICARD_COLLECT_WGS_METRICS from './modules/picard.nf'
-    MULTIQC from './modules/multiqc.nf'
-}
+include { FASTP } from './modules/fastp.nf'
+include { CHECK_AND_PROCESS_ALIGNMENT } from './modules/samtools.nf'
+include { PICARD_COLLECT_MULTIPLE_METRICS; PICARD_COLLECT_WGS_METRICS } from './modules/picard.nf'
+include { MULTIQC } from './modules/multiqc.nf'
+
 
 // Input parameters
 params.fastq_r1 = null
