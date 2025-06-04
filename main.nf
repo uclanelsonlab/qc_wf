@@ -120,10 +120,8 @@ process PICARD_COLLECT_WGS_METRICS {
     
     script:
     """
-    java ${java_mem} -jar /usr/picard/picard.jar CollectWgsMetrics \
-        -R ${fasta} \
-        -I ${bam} \
-        -O ${prefix}.wgs_metrics
+    ls ${bam} ${bam_index} ${fasta}
+    java ${java_mem} -jar /usr/picard/picard.jar CollectWgsMetrics -R ${fasta} -I ${bam} -O ${prefix}.wgs_metrics
     """
 }
 
