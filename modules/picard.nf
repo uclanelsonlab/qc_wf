@@ -1,5 +1,5 @@
 process PICARD_COLLECT_MULTIPLE_METRICS {
-    container "${params.picard_container}"
+    tag "CollectMultipleMetrics"
     
     input:
     path fasta
@@ -27,7 +27,7 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
 }
 
 process PICARD_COLLECT_WGS_METRICS {
-    container "${params.picard_container}"
+    tag "CollectWgsMetrics"
     
     input:
     path fasta

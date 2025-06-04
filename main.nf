@@ -15,21 +15,6 @@ include { CHECK_AND_PROCESS_ALIGNMENT } from './modules/samtools.nf'
 include { PICARD_COLLECT_MULTIPLE_METRICS; PICARD_COLLECT_WGS_METRICS } from './modules/picard.nf'
 include { MULTIQC } from './modules/multiqc.nf'
 
-
-// Input parameters
-params.fastq_r1 = null
-params.fastq_r2 = null
-params.prefix = null
-params.fasta = null
-params.aligned_file = null
-params.java_mem = "-Xmx100g"
-
-// Docker containers
-params.fastp_container = "staphb/fastp:latest"
-params.picard_container = "broadinstitute/picard:latest"
-params.multiqc_container = "ewels/multiqc:latest"
-params.samtools_container = "quay.io/biocontainers/samtools:1.21--h96c455f_1"
-
 // Validate required parameters
 if (!params.fastq_r1 || !params.fastq_r2 || !params.prefix || !params.fasta || !params.aligned_file) {
     error "Missing required parameters. Please provide fastq_r1, fastq_r2, prefix, fasta, and aligned_file"

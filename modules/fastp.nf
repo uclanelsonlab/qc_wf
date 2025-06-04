@@ -1,6 +1,6 @@
 process FASTP {
-    container "${params.fastp_container}"
-    
+    label "fastp"
+
     input:
     path fastq_r1
     path fastq_r2

@@ -1,6 +1,6 @@
 process MULTIQC {
-    container "${params.multiqc_container}"
-    
+    tag "multiqc"
+        
     publishDir "results/multiqc", mode: 'copy'
     
     input:
