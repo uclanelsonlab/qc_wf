@@ -97,11 +97,11 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
         -R ${fasta} \
         -I ${bam} \
         -O ${prefix} \
-        PROGRAM=CollectAlignmentSummaryMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
-        PROGRAM=QualityScoreDistribution \
-        PROGRAM=MeanQualityByCycle \
-        PROGRAM=CollectBaseDistributionByCycle
+        --PROGRAM CollectAlignmentSummaryMetrics \
+        --PROGRAM CollectInsertSizeMetrics \
+        --PROGRAM QualityScoreDistribution \
+        --PROGRAM MeanQualityByCycle \
+        --PROGRAM CollectBaseDistributionByCycle
     """
 }
 
