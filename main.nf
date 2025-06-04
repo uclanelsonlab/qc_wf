@@ -93,7 +93,6 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
     
     script:
     """
-    ls ${bam_index}
     java ${java_mem} -jar /usr/picard/picard.jar CollectMultipleMetrics \
         R=${fasta} \
         I=${bam} \
@@ -121,7 +120,6 @@ process PICARD_COLLECT_WGS_METRICS {
     
     script:
     """
-    ls ${bam_index}
     java ${java_mem} -jar /usr/picard/picard.jar CollectWgsMetrics \
         R=${fasta} \
         I=${bam} \
