@@ -1,5 +1,6 @@
 process CHECK_AND_PROCESS_ALIGNMENT {
-    container "${params.samtools_container}"
+    tag "$prefix"
+    label "samtools"
     
     input:
     path aligned_file

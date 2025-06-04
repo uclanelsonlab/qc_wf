@@ -1,5 +1,6 @@
 process PICARD_COLLECT_MULTIPLE_METRICS {
-    tag "CollectMultipleMetrics"
+    tag "$prefix"
+    label "picard"
     
     input:
     path fasta
@@ -27,7 +28,8 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
 }
 
 process PICARD_COLLECT_WGS_METRICS {
-    tag "CollectWgsMetrics"
+    tag "$prefix"
+    label "picard"
     
     input:
     path fasta

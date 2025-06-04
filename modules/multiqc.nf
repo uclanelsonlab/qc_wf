@@ -1,5 +1,6 @@
 process MULTIQC {
-    tag "multiqc"
+    tag "$prefix"
+    label "multiqc"
         
     publishDir "results/multiqc", mode: 'copy'
     

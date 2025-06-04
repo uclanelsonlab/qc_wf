@@ -1,4 +1,5 @@
 process FASTP {
+    tag "$prefix"
     label "fastp"
 
     input:
