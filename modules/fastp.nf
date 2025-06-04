@@ -14,6 +14,7 @@ process FASTP {
     script:
     """
     fastp -i ${fastq_r1} -I ${fastq_r2} \
+        --thread $task.cpus \
         -h ${prefix}_fastp.html \
         -j ${prefix}_fastp.json \
         --detect_adapter_for_pe

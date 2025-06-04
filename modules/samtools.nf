@@ -15,13 +15,13 @@ process CHECK_AND_PROCESS_ALIGNMENT {
     def file_ext = aligned_file.toString().toLowerCase()
     if (file_ext.endsWith('.cram')) {
         """
-        samtools view -b -T ${fasta} ${aligned_file} > ${prefix}.bam
-        samtools index ${prefix}.bam
+        samtools view -@ $task.cpus -b -T ${fasta} ${aligned_file} > ${prefix}.bam
+        samtools index -@ $task.cpus ${prefix}.bam
         """
     } else if (file_ext.endsWith('.bam')) {
         """
         cp ${aligned_file} ${prefix}.bam
-        samtools index ${prefix}.bam
+        samtools index -@ $task.cpus ${prefix}.bam
         """
     } else {
         error "Unsupported file format. Please provide either a BAM or CRAM file."
