@@ -94,9 +94,9 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
     script:
     """
     java ${java_mem} -jar /usr/picard/picard.jar CollectMultipleMetrics \
-        R=${fasta} \
-        I=${bam} \
-        O=${prefix} \
+        -R ${fasta} \
+        -I ${bam} \
+        -O ${prefix} \
         PROGRAM=CollectAlignmentSummaryMetrics \
         PROGRAM=CollectInsertSizeMetrics \
         PROGRAM=QualityScoreDistribution \
@@ -121,9 +121,9 @@ process PICARD_COLLECT_WGS_METRICS {
     script:
     """
     java ${java_mem} -jar /usr/picard/picard.jar CollectWgsMetrics \
-        R=${fasta} \
-        I=${bam} \
-        O=${prefix}.wgs_metrics
+        -R ${fasta} \
+        -I ${bam} \
+        -O ${prefix}.wgs_metrics
     """
 }
 
