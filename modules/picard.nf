@@ -1,6 +1,7 @@
 process PICARD_COLLECT_MULTIPLE_METRICS {
     tag "$prefix"
     label "picard"
+    publishDir "results/picard", mode: 'copy'
     
     input:
     path fasta
@@ -35,6 +36,7 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
 process PICARD_COLLECT_WGS_METRICS {
     tag "$prefix"
     label "picard"
+    publishDir "results/picard", mode: 'copy'
     
     input:
     path fasta

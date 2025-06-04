@@ -1,6 +1,7 @@
 process FASTP {
     tag "$prefix"
     label "fastp"
+    publishDir "results/fastp", mode: 'copy'
 
     input:
     path fastq_r1
