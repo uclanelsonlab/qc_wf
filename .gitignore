@@ -1,1 +1,7 @@
 .DS_Store
+.nextflow.log*
+.nextflow/
+pipeline_report.html
+timeline_report.html
+trace.txt
+work/
