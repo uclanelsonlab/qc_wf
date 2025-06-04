@@ -9,8 +9,8 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
     val prefix
     
     output:
-    path "${prefix}.*.metrics", emit: metrics_files
-    path "${prefix}.*.pdf", emit: pdf_files
+    path "${prefix}.metrics", emit: metrics_files
+    path "${prefix}*.pdf", emit: pdf_files, optional: true
     
     script:
     def avail_mem = 50000
