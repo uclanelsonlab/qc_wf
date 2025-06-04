@@ -12,8 +12,8 @@ process MULTIQC {
     val prefix
     
     output:
-    path "multiqc_report.html", emit: multiqc_html
-    path "multiqc_data", emit: multiqc_data
+    path "${prefix}_multiqc_report.html", emit: multiqc_html
+    path "*multiqc_data", emit: multiqc_data
     
     script:
     """
