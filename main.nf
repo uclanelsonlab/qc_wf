@@ -54,15 +54,13 @@ workflow {
         params.fasta,
         CHECK_AND_PROCESS_ALIGNMENT.out.bam,
         CHECK_AND_PROCESS_ALIGNMENT.out.bam_index,
-        params.prefix,
-        params.java_mem
+        params.prefix
     )
     PICARD_COLLECT_WGS_METRICS(
         params.fasta,
         CHECK_AND_PROCESS_ALIGNMENT.out.bam,
         CHECK_AND_PROCESS_ALIGNMENT.out.bam_index,
-        params.prefix,
-        params.java_mem
+        params.prefix
     )
     
     // Run MultiQC
