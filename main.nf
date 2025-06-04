@@ -16,6 +16,7 @@ params.fastq_r2 = null
 params.prefix = null
 params.fasta = null
 params.bam_file = null
+params.bam_index = null
 params.java_mem = "-Xmx100g"
 
 // Docker containers
@@ -24,8 +25,8 @@ params.picard_container = "broadinstitute/picard:latest"
 params.multiqc_container = "ewels/multiqc:latest"
 
 // Validate required parameters
-if (!params.fastq_r1 || !params.fastq_r2 || !params.prefix || !params.fasta || !params.bam_file) {
-    error "Missing required parameters. Please provide fastq_r1, fastq_r2, prefix, fasta, and bam_file"
+if (!params.fastq_r1 || !params.fastq_r2 || !params.prefix || !params.fasta || !params.bam_file || !params.bam_index) {
+    error "Missing required parameters. Please provide fastq_r1, fastq_r2, prefix, fasta, bam_file, and bam_index"
 }
 
 // Input channels
@@ -48,6 +49,11 @@ Channel
     .fromPath(params.bam_file)
     .ifEmpty { error "Cannot find BAM file: ${params.bam_file}" }
     .set { ch_bam }
+
+Channel
+    .fromPath(params.bam_index)
+    .ifEmpty { error "Cannot find BAM index file: ${params.bam_index}" }
+    .set { ch_bam_index }
 
 // Process definitions
 process FASTP {
@@ -77,6 +83,7 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
     input:
     path fasta
     path bam
+    path bam_index
     val prefix
     val java_mem
     
@@ -86,6 +93,7 @@ process PICARD_COLLECT_MULTIPLE_METRICS {
     
     script:
     """
+    ls ${bam_index}
     java ${java_mem} -jar /usr/picard/picard.jar CollectMultipleMetrics \
         R=${fasta} \
         I=${bam} \
@@ -104,6 +112,7 @@ process PICARD_COLLECT_WGS_METRICS {
     input:
     path fasta
     path bam
+    path bam_index
     val prefix
     val java_mem
     
@@ -112,6 +121,7 @@ process PICARD_COLLECT_WGS_METRICS {
     
     script:
     """
+    ls ${bam_index}
     java ${java_mem} -jar /usr/picard/picard.jar CollectWgsMetrics \
         R=${fasta} \
         I=${bam} \
@@ -149,8 +159,8 @@ workflow {
     FASTP(params.fastq_r1, params.fastq_r2, params.prefix)
     
     // Run Picard tools
-    PICARD_COLLECT_MULTIPLE_METRICS(params.fasta, params.bam_file, params.prefix, params.java_mem)
-    PICARD_COLLECT_WGS_METRICS(params.fasta, params.bam_file, params.prefix, params.java_mem)
+    PICARD_COLLECT_MULTIPLE_METRICS(params.fasta, params.bam_file, params.bam_index, params.prefix, params.java_mem)
+    PICARD_COLLECT_WGS_METRICS(params.fasta, params.bam_file, params.bam_index, params.prefix, params.java_mem)
     
     // Run MultiQC
     MULTIQC(
