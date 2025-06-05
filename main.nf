@@ -11,7 +11,7 @@
 nextflow.enable.dsl = 2
 
 include { FASTP } from './modules/fastp.nf'
-include { CHECK_AND_PROCESS_ALIGNMENT } from './modules/samtools.nf'
+include { CHECK_AND_PROCESS_ALIGNMENT; BAM_TO_CRAM } from './modules/samtools.nf'
 include { PICARD_COLLECT_MULTIPLE_METRICS; PICARD_COLLECT_WGS_METRICS } from './modules/picard.nf'
 include { QUALIMAP_BAMQC } from './modules/qualimap.nf'
 include { MULTIQC } from './modules/multiqc.nf'
@@ -66,10 +66,17 @@ workflow {
     // Run Qualimap
     QUALIMAP_BAMQC(
         CHECK_AND_PROCESS_ALIGNMENT.out.bam,
-        params.prefix,
-        params.size_homopolymer,
-        params.n_windows
+        params.prefix
     )
+    
+    if (params.cram) {
+        // Convert to CRAM if requested
+        BAM_TO_CRAM(
+            CHECK_AND_PROCESS_ALIGNMENT.out.bam,
+            params.fasta,
+            params.prefix
+        )
+    }
     
     // Run MultiQC
     MULTIQC(

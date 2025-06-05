@@ -6,8 +6,6 @@ process QUALIMAP_BAMQC {
     input:
     path bam
     val prefix
-    val size_homopolymer
-    val n_windows
 
     output:
     path "${prefix}", emit: results
@@ -27,9 +25,7 @@ process QUALIMAP_BAMQC {
         bamqc -c \\
         -bam $bam \\
         -outdir $prefix \\
-        -nt $task.cpus \\
-        -nw ${n_windows} \\
-        -hm ${size_homopolymer}
+        -nt $task.cpus 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
