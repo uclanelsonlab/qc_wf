@@ -84,6 +84,7 @@ workflow {
         FASTP.out.fastp_json,
         PICARD_COLLECT_MULTIPLE_METRICS.out.metrics_files,
         PICARD_COLLECT_WGS_METRICS.out.wgs_metrics,
+        QUALIMAP_BAMQC.out.results,
         params.prefix
     )
 } 

@@ -9,6 +9,7 @@ process MULTIQC {
     path fastp_json
     path metrics_files
     path wgs_metrics
+    path qualimap_results
     val prefix
     
     output:
@@ -19,6 +20,7 @@ process MULTIQC {
     
     script:
     """
+    cp -r $qualimap_results .
     multiqc . \
         --filename ${prefix}_multiqc_report.html \
         --outdir .

@@ -8,8 +8,8 @@ process QUALIMAP_BAMQC {
     val prefix
 
     output:
-    path "${prefix}", emit: results
-    path  "versions.yml"              , emit: versions
+    path "${prefix}",       emit: results
+    path  "versions.yml",   emit: versions
 
     when:
     task.ext.when == null || task.ext.when
