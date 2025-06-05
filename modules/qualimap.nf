@@ -10,7 +10,7 @@ process QUALIMAP_BAMQC {
     val n_windows
 
     output:
-    tuple val(meta), path("${prefix}"), emit: results
+    path "${prefix}", emit: results
     path  "versions.yml"              , emit: versions
 
     when:
@@ -38,7 +38,7 @@ process QUALIMAP_BAMQC {
     """
 
     stub:
-    prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
+    prefix = task.ext.suffix ? "${prefix}${task.ext.suffix}" : "${prefix}"
     """
     mkdir -p $prefix/css
     mkdir $prefix/images_qualimapReport
