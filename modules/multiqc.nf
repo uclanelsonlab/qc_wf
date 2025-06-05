@@ -20,7 +20,6 @@ process MULTIQC {
     
     script:
     """
-    cp -r $qualimap_results .
     multiqc . \
         --filename ${prefix}_multiqc_report.html \
         --outdir .
