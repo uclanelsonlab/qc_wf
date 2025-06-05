@@ -27,7 +27,7 @@ process QUALIMAP_BAMQC {
         bamqc -c \\
         -bam $bam \\
         -outdir $prefix \\
-        -nt $task.cpus
+        -nt $task.cpus \\
         -nw ${n_windows} \\
         -hm ${size_homopolymer}
 
